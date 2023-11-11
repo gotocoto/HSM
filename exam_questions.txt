@@ -1,0 +1,370 @@
+Q: What is the capital of France?
+A. London
+B. Paris
+C. Berlin
+D. Madrid
+Correct Answer: B
+
+Q: Who wrote 'Romeo and Juliet'?
+A. William Shakespeare
+B. Charles Dickens
+C. Jane Austen
+D. Mark Twain
+Correct Answer: A
+
+Q: What is the largest mammal in the world?
+A. Elephant
+B. Blue Whale
+C. Giraffe
+D. Gorilla
+Correct Answer: B
+
+Q: What is the chemical symbol for gold?
+A. Au
+B. Ag
+C. Fe
+D. Cu
+Correct Answer: A
+
+Q: In which year did Christopher Columbus reach the Americas?
+A. 1492
+B. 1620
+C. 1776
+D. 1812
+Correct Answer: A
+
+Q: What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Correct Answer: C
+
+Q: Who painted the Mona Lisa?
+A. Leonardo da Vinci
+B. Vincent van Gogh
+C. Pablo Picasso
+D. Claude Monet
+Correct Answer: A
+
+Q: What is the largest planet in our solar system?
+A. Earth
+B. Jupiter
+C. Mars
+D. Saturn
+Correct Answer: B
+
+Q: In which year did World War II end?
+A. 1943
+B. 1945
+C. 1950
+D. 1939
+Correct Answer: B
+
+Q: Who is known as the "Father of Computer Science"?
+A. Alan Turing
+B. Bill Gates
+C. Steve Jobs
+D. Tim Berners-Lee
+Correct Answer: A
+
+Q: What is the chemical symbol for oxygen?
+A. O2
+B. O
+C. Ox
+D. Oz
+Correct Answer: B
+
+Q: Which element has the symbol 'Na' on the periodic table?
+A. Sodium
+B. Nickel
+C. Neon
+D. Nitrogen
+Correct Answer: A
+
+Q: What is the currency of Australia?
+A. Dollar
+B. Euro
+C. Yen
+D. Peso
+Correct Answer: A
+
+Q: What is the largest ocean on Earth?
+A. Atlantic Ocean
+B. Indian Ocean
+C. Southern Ocean
+D. Pacific Ocean
+Correct Answer: D
+
+Q: Who wrote the play "Hamlet"?
+A. William Shakespeare
+B. Charles Dickens
+C. Jane Austen
+D. Mark Twain
+Correct Answer: A
+
+Q: What is the speed of light in a vacuum?
+A. 300,000 km/s
+B. 150,000 km/s
+C. 500,000 km/s
+D. 1,000,000 km/s
+Correct Answer: A
+
+Q: Who developed the theory of relativity?
+A. Isaac Newton
+B. Albert Einstein
+C. Galileo Galilei
+D. Niels Bohr
+Correct Answer: B
+
+Q: What is the currency of Japan?
+A. Yen
+B. Won
+C. Yuan
+D. Ringgit
+Correct Answer: A
+
+Q: Which planet is known as the "Red Planet"?
+A. Venus
+B. Mars
+C. Jupiter
+D. Saturn
+Correct Answer: B
+
+Q: Who is the author of "To Kill a Mockingbird"?
+A. Harper Lee
+B. J.K. Rowling
+C. George Orwell
+D. Ernest Hemingway
+Correct Answer: A
+
+Q: What is the chemical symbol for water?
+A. H2O
+B. CO2
+C. O2
+D. NaCl
+Correct Answer: A
+
+Q: What is the capital of Brazil?
+A. Rio de Janeiro
+B. Buenos Aires
+C. Santiago
+D. Brasília
+Correct Answer: D
+
+Q: Who is the author of "The Great Gatsby"?
+A. F. Scott Fitzgerald
+B. Ernest Hemingway
+C. Mark Twain
+D. Jane Austen
+Correct Answer: A
+
+Q: What is the smallest prime number?
+A. 0
+B. 1
+C. 2
+D. 3
+Correct Answer: C
+
+Q: Who discovered penicillin?
+A. Alexander Fleming
+B. Marie Curie
+C. Louis Pasteur
+D. Jonas Salk
+Correct Answer: A
+
+Q: What is the currency of China?
+A. Yuan
+B. Yen
+C. Won
+D. Ringgit
+Correct Answer: A
+
+Q: In which year did the Berlin Wall fall?
+A. 1987
+B. 1989
+C. 1991
+D. 1993
+Correct Answer: B
+
+Q: What is the chemical symbol for potassium?
+A. K
+B. P
+C. Pt
+D. Pb
+Correct Answer: A
+
+Q: Who wrote "Pride and Prejudice"?
+A. Jane Austen
+B. Charlotte Brontë
+C. Charles Dickens
+D. Leo Tolstoy
+Correct Answer: A
+
+Q: What is the largest organ in the human body?
+A. Heart
+B. Liver
+C. Skin
+D. Lungs
+Correct Answer: C
+
+Q: Who painted "The Last Supper"?
+A. Leonardo da Vinci
+B. Michelangelo
+C. Raphael
+D. Vincent van Gogh
+Correct Answer: A
+
+Q: What is the speed of sound in air?
+A. 343 meters per second
+B. 123 meters per second
+C. 567 meters per second
+D. 789 meters per second
+Correct Answer: A
+
+Q: What is the capital of South Korea?
+A. Seoul
+B. Tokyo
+C. Beijing
+D. Manila
+Correct Answer: A
+
+Q: In which year did the United States declare its independence?
+A. 1773
+B. 1776
+C. 1789
+D. 1799
+Correct Answer: B
+
+Q: What is the chemical symbol for silver?
+A. Si
+B. Ag
+C. Au
+D. Fe
+Correct Answer: B
+
+Q: Who is known as the "Father of Medicine"?
+A. Hippocrates
+B. Galen
+C. Avicenna
+D. Paracelsus
+Correct Answer: A
+
+Q: What is the largest moon of Saturn?
+A. Titan
+B. Europa
+C. Ganymede
+D. Triton
+Correct Answer: A
+
+Q: Who composed "Moonlight Sonata"?
+A. Wolfgang Amadeus Mozart
+B. Ludwig van Beethoven
+C. Johann Sebastian Bach
+D. Franz Schubert
+Correct Answer: B
+
+Q: What is the chemical symbol for carbon dioxide?
+A. CO
+B. CO2
+C. O2
+D. H2O
+Correct Answer: B
+
+Q: Who was the first woman to win a Nobel Prize?
+A. Marie Curie
+B. Rosalind Franklin
+C. Jane Goodall
+D. Amelia Earhart
+Correct Answer: A
+
+Q: What is the capital of Canada?
+A. Ottawa
+B. Toronto
+C. Vancouver
+D. Montreal
+Correct Answer: A
+
+Q: What does HTML stand for?
+A. Hyperlink and Text Markup Language
+B. Hyper Text Markup Language
+C. High-Level Text Markup Language
+D. Hyper Transfer Markup Language
+Correct Answer: B
+
+Q: Which programming language is known for its use in web development and is often used alongside HTML and CSS?
+A. Java
+B. Python
+C. JavaScript
+D. Ruby
+Correct Answer: C
+
+Q: What is the purpose of a SQL SELECT statement?
+A. To update records in a database
+B. To delete records from a database
+C. To retrieve data from a database
+D. To insert new records into a database
+Correct Answer: C
+
+Q: In object-oriented programming, what is encapsulation?
+A. A way to create multiple instances of a class
+B. The bundling of data and methods that operate on the data into a single unit
+C. The process of converting source code into machine code
+D. A type of loop in programming
+Correct Answer: B
+
+Q: What is the function of an operating system?
+A. To manage hardware resources and provide a user interface
+B. To compile and execute code
+C. To store and retrieve data
+D. To design graphical user interfaces
+Correct Answer: A
+
+Q: What is the purpose of the Python module 'random'?
+A. To generate random numbers
+B. To perform mathematical operations
+C. To interact with the file system
+D. To work with dates and times
+Correct Answer: A
+
+Q: What is the primary function of a firewall in network security?
+A. To encrypt data transmissions
+B. To filter and control network traffic
+C. To physically secure the network server
+D. To monitor user activities
+Correct Answer: B
+
+Q: What does the acronym API stand for in the context of software development?
+A. Application Programming Interface
+B. Advanced Programming Interface
+C. Automated Program Interface
+D. Application Process Interface
+Correct Answer: A
+
+Q: Which data structure follows the Last In, First Out (LIFO) principle?
+A. Queue
+B. Stack
+C. Linked List
+D. Tree
+Correct Answer: B
+
+Q: What does the term "bug" refer to in software development?
+A. A feature that needs improvement
+B. An error or flaw in the code
+C. A piece of code that enhances performance
+D. A programming language keyword
+Correct Answer: B
+
+Q: What is the purpose of the CSS (Cascading Style Sheets) language in web development?
+A. To define the structure of a webpage
+B. To provide interactivity and dynamic content
+C. To style and format the presentation of HTML elements
+D. To perform server-side scripting
+Correct Answer: C
+
+Q: What is the difference between HTTP and HTTPS?
+A. HTTP is a protocol for secure data transmission, while HTTPS is not.
+B. HTTPS is a protocol for secure data transmission over the internet, while HTTP is not secure.
+C. HTTP and HTTPS are the same and can be used interchangeably.
+D. HTTPS is a programming language, while HTTP is a markup language.
+Correct Answer: B
