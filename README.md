@@ -1,5 +1,5 @@
-```markdown
 # High School Musical Python Game
+```markdown
 
 Welcome to the High School Musical Python Game! This text-based game is inspired by the High School Musical movie series and lets you experience the life of a high school student, balancing academics, sports, and the arts.
 
