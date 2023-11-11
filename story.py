@@ -2,14 +2,8 @@ import time
 import random
 import sys
 import re
-
-class Player:
-    def __init__(self):
-        self.academic_knowledge = 5
-        self.singing_skills = 5
-        self.basketball_skills = 5
-        self.basketball_team_member = False
-        self.musical_member = False
+import blackjack_game
+from player import Player
 
 def introduction(player):
     print("Welcome to the High School Musical Adventure!")
@@ -269,26 +263,209 @@ def load_questions(file_path):
 
     return questions
 
+# Function to handle chatting with friends
+def chat_with_friends(player):
+    print("You join your friends at a table and start chatting.")
+
+    # Simulate a conversation with friends
+    conversation_options = [
+        "1. Talk about the upcoming school musical.",
+        "2. Discuss the latest basketball game.",
+        "3. Share your plans for the weekend.",
+    ]
+
+    for option in conversation_options:
+        print(option)
+
+    conversation_choice = input("Choose a topic to discuss (1, 2, or 3): ")
+
+    if conversation_choice == '1':
+        print("Your friends are excited about the musical. You share your interest and become more involved.")
+        player.musical_member = True
+        player.social_status += 10
+    elif conversation_choice == '2':
+        print("Your friends discuss the basketball game. You join in, and your basketball skills improve.")
+        player.basketball_skills += 5
+        player.social_status += 5
+    elif conversation_choice == '3':
+        print("You talk about your plans for the weekend. Your friends find it interesting, and your social status improves.")
+        player.social_status += 8
+    else:
+        print("Invalid choice. The conversation continues without a significant impact.")
+
+    print(f"Your social status is now {player.social_status}.")
+
+
+def go_to_cafeteria(player):
+    print("\nYou head to the cafeteria to grab a bite.")
+
+    # Add cafeteria scene logic here
+    print("In the cafeteria, you have a few options:")
+    print("1. Chat with friends")
+    print("2. Get food")
+    print("3. Find a quiet spot to study")
+    print("4. Play a quick game on your phone")
+
+    cafeteria_choice = input("Enter your choice (1, 2, 3, or 4): ")
+
+    if cafeteria_choice == '1':
+        chat_with_friends(player)
+    elif cafeteria_choice == '2':
+        get_food_sub_option(player)
+    elif cafeteria_choice == '3':
+        memory_mini_game(player)
+    elif cafeteria_choice == '4':
+        blackjack_game.play_blackjack(player)
+    else:
+        print("Invalid choice. Please enter 1, 2, 3, or 4.")
+
+# New function for the memory mini-game
+def memory_mini_game(player):
+    print("You decide to challenge your memory with a quick mini-game.")
+
+    # Generate a sequence of numbers
+    sequence = [1, 2, 3, 4, 5]
+    print("Memorize the sequence:", sequence)
+
+    # Player's turn to recall the sequence
+    user_input = input("Enter the sequence, separated by spaces: ")
+    user_sequence = [int(num) for num in user_input.split()]
+
+    # Check if the player's input matches the generated sequence
+    if user_sequence == sequence:
+        print("Congratulations! You remembered the sequence.")
+        # Add any rewards or stat improvements here
+        player.academic_knowledge += 5
+        player.energy -= 5
+    else:
+        print("Oops! It seems like you forgot the sequence.")
+
+def get_food_sub_option(player):
+    print("You decide to grab some food.")
+
+    # Add food options logic here
+    print("Food options:")
+    print("1. Healthy Salad (increases energy by 10) - $5")
+    print("2. Pizza Slice (increases energy by 5) - $3")
+    print("3. Energy Drink (increases energy by 15) - $8")
+    print("4. Sandwich (increases energy by 7) - $4")
+    print("5. Fruit Smoothie (increases energy by 12) - $6")
+
+    food_choice = input("Enter your choice (1, 2, 3, 4, or 5): ")
+
+    if food_choice == '1':
+        cost = 5
+        food_name = "Healthy Salad"
+        energy_increase = 10
+    elif food_choice == '2':
+        cost = 3
+        food_name = "Pizza Slice"
+        energy_increase = 5
+    elif food_choice == '3':
+        cost = 8
+        food_name = "Energy Drink"
+        energy_increase = 15
+    elif food_choice == '4':
+        cost = 4
+        food_name = "Sandwich"
+        energy_increase = 7
+    elif food_choice == '5':
+        cost = 6
+        food_name = "Fruit Smoothie"
+        energy_increase = 12
+    else:
+        print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
+        return
+
+    # Check if the player has enough money to buy the selected food
+    if player.money >= cost:
+        print(f"You chose the {food_name}. It boosts your energy.")
+        player.energy += energy_increase
+        player.money -= cost
+        print(f"You paid ${cost}. Your current balance: ${player.money}")
+    else:
+        print("Sorry, you don't have enough money to buy that.")
+
+    # Limit energy to a maximum value (e.g., 100)
+    player.energy = min(player.energy, 100)
+# You can expand and customize this function based on your game's requirements.
+
+def game_loop(player):
+    print("Welcome to the High School Musical Python Game!")
+
+    while True:
+        print("\nOptions:")
+        print("1. Continue the story")
+        print("2. View player stats")
+        print("3. Quit")
+
+        choice = input("Enter your choice (1, 2, or 3): ")
+
+        if choice == '1':
+            # Call a function to continue the story
+            continue_story(player)
+        elif choice == '2':
+            # Call a function to display player stats
+            display_stats(player)
+        elif choice == '3':
+            print("Thanks for playing! Goodbye.")
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+def continue_story(player):
+    print("\nYou find yourself at East High School facing various challenges and opportunities.")
+    
+    while True:
+        print("\nOptions:")
+        if player.musical_member:
+            print("1. Attend musical rehearsal")
+        else:
+            print("1. Audition for the school musical")
+        if player.basketball_team_member:
+            print("2. Attend basketball practice")
+        else:
+            print("2. Attend basketball tryouts")
+        print("3. Study for exams")
+        print("4. Go to the cafeteria")
+        print("5. Back to main menu")
+
+        choice = input("Enter your choice (1, 2, 3, 4, or 5): ")
+
+        if choice == '1':
+            if player.musical_member:
+                print("You decide to attend musical rehearsal.")
+                musical_rehearsal(player)
+            else:
+                print("You decide to audition for the school musical.")
+                audition_for_musical(player)
+        elif choice == '2':
+            if player.basketball_team_member:
+                print("You decide to attend basketball practice.")
+                basketball_practice(player)
+            else:
+                print("You decide to attend basketball tryouts.")
+                go_to_basketball_tryouts(player)
+        elif choice == '3':
+            study_for_exams(player)
+        elif choice == '4':
+            go_to_cafeteria(player)
+        elif choice == '5':
+            print("Returning to the main menu.")
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
+
+def display_stats(player):
+    # Display player stats
+    print("\nPlayer Stats:")
+    print(f"Academic Knowledge: {player.academic_knowledge}")
+    print(f"Singing Skills: {player.singing_skills}")
+    print(f"Basketball Skills: {player.basketball_skills}")
+    print(f"Basketball Team Member: {player.basketball_team_member}")
+    print(f"Musical Member: {player.musical_member}")
+
 # Example usage:
-player = Player()
-
-while True:
-    introduction(player)
-    choice = make_choice(player)
-
-    if choice == '1':
-        focus_on_studies(player)
-    elif choice == '2':
-        audition_for_musical(player)
-    elif choice == '3':
-        try_out_for_basketball(player)
-    elif choice == '4':
-        study_for_exams(player)
-
-    print(f"Your current stats: Academic Knowledge - {player.academic_knowledge}, Singing Skills - {player.singing_skills}, Basketball Skills - {player.basketball_skills}")
-
-    play_again = input("Do you want to make another choice? (yes/no): ").lower()
-    if play_again != 'yes':
-        break
-
-print("Thanks for playing!")
+if __name__ == "__main__":
+    player = Player()
+    game_loop(player)
