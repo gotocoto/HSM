@@ -1,0 +1,28 @@
+bout to be posted.")
+    time.sleep(1)
+    print("Do you wait anxiously for the list (1) or distract yourself with friends (2)?")
+    choice = make_choice()
+
+    if choice == '1':
+        print("You wait nervously, and when the list is posted, you find out you got the lead role!")
+        time.sleep(1)
+        print("Congratulations! You're the star of the show!")
+    else:
+        print("You decide to hang out with friends to distract yourself.")
+        time.sleep(1)
+        print("When you finally check the list, you find out you got a supporting role. Still a great experience!")
+
+def backstage():
+    print("You've decided to help out backstage with set design and props.")
+    time.sleep(1)
+    print("The production is a massive success, and everyone appreciates your hard work.")
+    time.sleep(1)
+    print("Congratulations! The cast and crew applaud your efforts.")
+
+def main():
+    introduction()
+    choice = make_choice()
+
+    if choice == '1':
+        audition()
+    elif choice
