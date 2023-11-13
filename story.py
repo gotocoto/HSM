@@ -4,6 +4,7 @@ import sys
 import re
 import blackjack_game
 from player import Player
+import os
 
 QUESTION_DIR = "questions"
 
@@ -81,7 +82,7 @@ def audition_for_musical(player):
 
     # Singing mini-game with Troy and get the score
     print("\nGet ready to sing with Troy! Complete the lyrics:\n")
-    song_file_path = 'what_ive_been_looking_for_lyrics.txt'
+    song_file_path = 'what_ive_been_looking_for'
     singing_result = player.singing_mini_game(song_file_path)
 
     # Determine Ms. Darbus's impression based on the score
@@ -248,7 +249,7 @@ def study_for_exams(player):
     choice = input("Enter your choice (1 or 2): ")
 
     if choice == '1':
-        questions_file = "academic_exam_questions.txt"
+        questions_file = "exam_questions.txt"
     elif choice == '2':
         questions_file = "life_questions.txt"
     else:
@@ -367,7 +368,7 @@ def go_to_cafeteria(player):
     print("4. Play a quick game on your phone")
 
     cafeteria_choice = input("Enter your choice (1, 2, 3, or 4): ")
-
+    print("")
     if cafeteria_choice == '1':
         chat_with_friends(player)
     elif cafeteria_choice == '2':
@@ -449,15 +450,25 @@ def introduction():
     return player
 
 def game_loop():
-    player = introduction()
+    player_data_file = "player_data.json"  # Replace with your desired file name
+    player = Player("Dummy") 
+
+    # Check if the player data file exists
+    if os.path.exists(player_data_file):
+        # If the file exists, load player data
+        player.load_from_file(player_data_file)
+        print("Welcome back, {}!".format(player.name))
+    else:
+        player = introduction()
     continue_story(player)
     while True:
         print("\nOptions:")
         print("1. Continue the story")
         print("2. View player stats")
-        print("3. Quit")
+        print("3. Save player data")
+        print("4. Quit")
 
-        choice = input("Enter your choice (1, 2, or 3): ")
+        choice = input("Enter your choice (1, 2, 3, or 4): ")
 
         if choice == '1':
             # Call a function to continue the story
@@ -466,10 +477,14 @@ def game_loop():
             # Call a function to display player stats
             display_stats(player)
         elif choice == '3':
+            # Save player data
+            player.save_to_file(player_data_file)
+            print("Player data saved.")
+        elif choice == '4':
             print("Thanks for playing! Goodbye.")
             break
         else:
-            print("Invalid choice. Please enter 1, 2, or 3.")
+            print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
 def continue_story(player):
     print("\nYou find yourself at East High School facing various challenges and opportunities.")
@@ -489,7 +504,7 @@ def continue_story(player):
         print("5. Back to main menu")
 
         choice = input("Enter your choice (1, 2, 3, 4, or 5): ")
-
+        
         if choice == '1':
             if player.musical_member:
                 print("You decide to attend musical rehearsal.")
@@ -522,6 +537,7 @@ def display_stats(player):
     print(f"Basketball Skills: {player.basketball_skills}")
     print(f"Basketball Team Member: {player.basketball_team_member}")
     print(f"Musical Member: {player.musical_member}")
+    print(f"Energy: {player.energy}")
 
 # Example usage:
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ import random
 import os
 import getpass
 import time
+import json
 
 
 class Player:
@@ -19,7 +20,15 @@ class Player:
         self.money = 20  # Default starting money
         self.social_status = 50  # Default starting social status
         self.difficulty = difficulty
-
+    def save_to_file(self, filename):
+        # Save player data to a JSON file
+        with open(filename, 'w') as file:
+            json.dump(self.__dict__, file)
+    def load_from_file(self, filename):
+        # Load player data from a JSON file
+        with open(filename, 'r') as file:
+            data = json.load(file)
+        self.__dict__.update(data)
     def study_for_exams(self):
         print("You find a quiet corner, take out your books, and study for a while.")
         # Add studying logic here
@@ -28,66 +37,80 @@ class Player:
         self.energy -= 10  # Studying consumes energy
         print("You've gained some academic knowledge, but you feel a bit tired.")
 
-    def preprocess_line(self, line):
-        # Remove punctuation and convert to lowercase
-        line = line.translate(str.maketrans("", "", string.punctuation)).lower()
-        return line
+    def preprocess_line(line):
+    # Remove punctuation and convert to lowercase
+    line = re.sub(r'[^\w\s]', '', line).lower()
+    return line
 
-    def rate_line_correctness(self, user_line, correct_line):
-        user_line_processed = self.preprocess_line(user_line)
-        correct_line_processed = self.preprocess_line(correct_line)
-
-        if user_line_processed == correct_line_processed:
-            return 2  # Full score for a completely correct line
-        elif user_line_processed in correct_line_processed or correct_line_processed in user_line_processed:
-            return 1  # Partial score for a partially correct line
-        else:
-            return 0  # No score for an incorrect line
-
-    def singing_mini_game(self, song_name):
-        # File path for the lyrics folder
-        lyrics_folder = "lyrics"
-
-        # File path for the selected song lyrics
-        song_file_path = f"{lyrics_folder}/{song_name}_lyrics.txt"
-
-        # Load the lyrics from the file
-        with open(song_file_path, 'r') as file:
-            lyrics = file.read().splitlines()
+    def singing_mini_game(player, file_path):
+        # Load the lines from the file, excluding empty lines
+        with open(file_path, 'r') as file:
+            lines = file.read().splitlines()
+            lyrics = [line for line in lines if line.strip()]
 
         # Choose a random starting point in the lyrics
-        start_index = random.randint(0, len(lyrics) - 5)
-        lines_to_display = 4 + self.difficulty  # Adjust the number of lines based on difficulty
+        start_index = random.randint(0, len(lyrics) - player.difficulty)
+        lines_to_display = 4 + player.difficulty  # Adjust the number of lines based on difficulty
         lines_to_sing = lyrics[start_index:start_index + lines_to_display]
 
         # Display the starting lines to the player
         print("\nGet ready to sing! Complete the lyrics:")
         for line in lines_to_sing:
             print(line)
-            time.sleep(1)
 
         # User input for singing
-        if self.difficulty > 0:
+        if player.difficulty > 0:
             correct_lines = lyrics[start_index:start_index + lines_to_display]
             user_input_lines = []
 
-            for _ in range(lines_to_display):
+            for line in lines_to_sing:
+                # Check if the line is wrapped in brackets
+                if "[" in line and "]" in line:
+                    singer = re.search(r'\[.*?\]', line).group(0)
+                    print(f"\n{singer} {line.replace(singer, '').strip()}")
                 user_input = input("\nEnter the next line: ")
-                user_input_lines.append(user_input)
+                # Check if the user's input is correct, excluding empty lines
+                correct_line = preprocess_line(correct_lines.pop(0))
+                user_input_processed = preprocess_line(user_input)
 
-            # Check the correctness of the user's input
-            correct_lines_lower = [line.lower() for line in correct_lines]
-            user_input_lines_lower = [line.lower() for line in user_input_lines]
+                if user_input_processed == correct_line:
+                    print("Correct!")
+                else:
+                    print(f"**SCREECH** You said the wrong line. Let's try again...")
+                    user_input = input("\nEnter the correct line: ")
+                    user_input_processed = preprocess_line(user_input)
+                    if user_input_processed == correct_line:
+                        print("Great! You got it right on the second try.")
+                    else:
+                        print(f"Oops! You said the wrong line again. The correct line is: {correct_line}")
+                        return False
 
-            if user_input_lines_lower == correct_lines_lower:
-                print("Great job! You sang it perfectly.")
-                self.singing_skills += 5  # Adjust the score based on your preference
-                return True
-            else:
-                print("Oops! It seems you made a mistake in the lyrics.")
-                return False
+        print("Congratulations! You sang it perfectly.")
+        return True
+    
+    def play_memory_minigame(self):
+        print("You decide to challenge your memory with a quick mini-game.")
+
+        # Generate a sequence of numbers
+        sequence = [random.randint(1, 9) for _ in range(5)]
+
+        # Display the sequence for the player to see
+        print("Memorize the sequence:", sequence)
+
+        # Player's turn to recall and type the sequence
+        print("Enter the numbers in the sequence in numerical order:")
+
+        # Construct the correct sequence string for validation
+        correct_sequence_str = ' '.join(map(str, sorted(sequence)))
+
+        # Player types the sequence without seeing what they are typing
+        user_input = getpass.getpass(prompt="Type the numbers (separated by spaces): ")
+
+        # Check if the player's input matches the correct sequence
+        if user_input == correct_sequence_str:
+            print("Congratulations! You correctly entered the sequence.")
+            # Add any rewards or stat improvements here
+            self.academic_knowledge += 5
+            self.energy -= 5
         else:
-            # If difficulty is 0, the player doesn't need to enter any lines
-            input("\nPress Enter to continue...")
-
-        return True  # For simplicity, consider it a success without user input
+            print("Oops! It seems like you made a mistake in the sequence.")
