@@ -5,6 +5,7 @@ import re
 import blackjack_game
 from player import Player
 
+'''
 def introduction(player):
     print("Welcome to the High School Musical Adventure!")
     time.sleep(1)
@@ -13,7 +14,7 @@ def introduction(player):
     print(f"Your current stats: Academic Knowledge - {player.academic_knowledge}, Singing Skills - {player.singing_skills}, Basketball Skills - {player.basketball_skills}")
     time.sleep(1)
     print("You can choose to focus on your studies and science club (1), audition for the musical (2), try out for the basketball team (3), or study for exams (4).")
-
+'''
 def make_choice(player):
     choice = input("Enter your choice (1, 2, 3, or 4): ")
     return choice
@@ -27,23 +28,67 @@ def focus_on_studies(player):
     player.academic_knowledge += 3
 
 def audition_for_musical(player):
-    print("You've decided to audition for the winter musical, 'High School Musical'!")
+    print("🎭 Audition for the school musical! 🎤")
     time.sleep(1)
-    print("The auditions are coming up, and you need to choose a song to perform.")
+
+    # Display information about the audition
+    print("The school musical auditions are here, and the stage is set.")
     time.sleep(1)
-    print("Do you perform 'Start of Something New' (1), 'Get'cha Head in the Game' (2), or 'Breaking Free' (3)?")
-    choice = make_choice(player)
+    print(f"You see Troy across the stage, He is also auditioning?")
+    time.sleep(3)
 
-    if choice == '1':
-        player.singing_skills += perform_song('Start of Something New', 'Troy', 'Gabriella')
-    elif choice == '2':
-        player.singing_skills += perform_song('Get\'cha Head in the Game', 'Basketball Team')
-    elif choice == '3':
-        player.singing_skills += perform_song('Breaking Free', 'Troy', 'Gabriella')
+    # Simulate the initial audition scenario
+    print("\nSharpay and Ryan Evans walk onto the stage.")
+    time.sleep(3)
+    print("\nSharpay and Ryan Evans: (singing) It's hard to believe\nThat I couldn't see...")
+    time.sleep(6)
 
-    if player.singing_skills >= 15:
-        print("Congratulations! You made it into the musical!")
+    # Display the hesitation of Troy and the player
+    print(f"\nTroy and you watch the performance but are hesitant to audition.")
+    time.sleep(2)
+    print("As the auditions are unofficially declared 'over', you gain the confidence to step forward.")
+    time.sleep(2)
+
+    # Offer Troy to sing with the player
+    troy_offer = input(f"Troy offers to sing with you. Do you accept? (yes/no): ").lower()
+    time.sleep(1)
+
+    if troy_offer == 'yes':
+        print(f"You and Troy step forward to audition together.")
+        time.sleep(2)
+    else:
+        print(f"You decide not to audition with Troy.")
+        time.sleep(2)
+        print("Without a co-singer, you can't proceed with the audition.")
+        print("Unfortunately, your journey at East High School ends here.")
+        return  # End the story
+
+    # Drama teacher Ms. Darbus declares them too late and leaves
+    print("Ms. Darbus declares that you are too late and leaves the stage.")
+    time.sleep(3)
+
+    # Kelsi drops her music sheets on the stage
+    print("Kelsi Nielsen, the musical's composer, drops her music sheets on the stage.")
+    time.sleep(2)
+    print(f"You and Troy rush to help her and decide to sing the same song together.")
+    time.sleep(2)
+
+    # Simulate singing together
+    print(f"\nTroy and {player.name}: (singing) It's hard to believe\nThat I couldn't see...")
+    time.sleep(3)
+
+    # Singing mini-game with Troy and get the score
+    print("\nGet ready to sing with Troy! Complete the lyrics:\n")
+    song_file_path = 'what_ive_been_looking_for_lyrics.txt'
+    singing_result = player.singing_mini_game(song_file_path)
+
+    # Determine Ms. Darbus's impression based on the score
+    if singing_result:
+        print("Ms. Darbus is impressed with your singing performance!")
+        player.singing_skills += 10
         player.musical_member = True
+    else:
+        print("Unfortunately, your performance did not impress Ms. Darbus. Better luck next time.")
 
 def perform_song(song, *characters):
     print(f"You've chosen to perform '{song}'!")
@@ -62,36 +107,7 @@ def perform_song(song, *characters):
         print("While not perfect, your performance was still impressive. Keep practicing for the big night.")
         return 1
 
-def song_performance_mini_game(song):
-    print("Complete the lyrics by typing the correct word when prompted.")
-    time.sleep(1)
 
-    lyrics = load_lyrics(f"{song.lower().replace(' ', '_')}_lyrics.txt")
-
-    correct_words = 0
-    total_words = len(lyrics)
-    start_index = random.randint(0, total_words - 5)
-
-    for word in lyrics[start_index:start_index + 4]:
-        print(word, end=' ')
-
-    for _ in range(3):
-        user_input = input("\nEnter the next line: ")
-        expected_input = ' '.join(lyrics[start_index + 4:start_index + 8]).lower().strip()
-
-        if user_input.lower().strip() == expected_input:
-            print("Correct!")
-            correct_words += 4
-            break
-        else:
-            print("Wrong! Try again.")
-
-    return (correct_words / total_words) * 10  # Convert to a score out of 10
-
-def load_lyrics(file_path):
-    with open(file_path, 'r') as file:
-        lyrics = re.findall(r'\b\w+\b', file.read())
-    return lyrics
 
 def try_out_for_basketball(player):
     print("You've decided to try out for the basketball team, Wildcats!")
@@ -176,28 +192,52 @@ def practice_singing(player):
     elif choice == '3':
         player.singing_skills += practice_song('Breaking Free', 'Troy', 'Gabriella')
 
-def practice_song(song, *characters):
-    print(f"You've chosen to practice singing '{song}'!")
-    time.sleep(1)
-    print(f"Get ready to improve your singing skills as {' and '.join(characters)}!")
-    time.sleep(1)
-    print("Let's play the singing practice mini-game!")
+def practice_singing(player):
+    print("You decide to practice singing for the upcoming musical.")
 
-    lyrics = load_lyrics(f"{song.lower().replace(' ', '_')}_lyrics.txt")
-    start_index = random.randint(0, len(lyrics) - 4)
+    # List of available High School Musical songs (replace with your song names)
+    song_list = [
+        "start_of_something_new",
+        "what_ive_been_looking_for",
+        "breaking_free",
+        "stick_to_the_status_quo",
+        "getcha_head_in_the_game",
+        "bop_to_the_top",
+        "were_all_in_this_together",
+    ]
 
-    for word in lyrics[start_index:start_index + 4]:
-        print(word, end=' ')
+    # Display available songs
+    print("Available songs:")
+    for i, song in enumerate(song_list, start=1):
+        print(f"{i}. {song.replace('_', ' ').title()}")  # Display in title case
 
-    for _ in range(3):
-        user_input = input("\nEnter the next line: ")
-        expected_input = ' '.join(lyrics[start_index + 4:start_index + 8]).lower().strip()
+    # Get user's choice of song
+    while True:
+        try:
+            song_choice = int(input("Choose a song to practice (1-7): "))
+            if 1 <= song_choice <= 7:
+                selected_song = song_list[song_choice - 1]
+                break
+            else:
+                print("Invalid choice. Please enter a number between 1 and 7.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
 
-        if user_input.lower().strip() == expected_input:
-            print("Correct! Your singing is getting better.")
-            return 2
+    # File path for the selected song lyrics (replace with your file path)
+    song_file_path = f"{selected_song}"
+
+    # Ensure the file exists before calling the singing mini-game
+    if os.path.exists(song_file_path):
+        # Call the singing mini-game
+        success = player.singing_mini_game(song_file_path)
+
+        if success:
+            print(f"Your singing skills on '{selected_song.replace('_', ' ').title()}' have improved through practice!")
         else:
-            print("Wrong! Try again.")
+            print(f"Keep practicing '{selected_song.replace('_', ' ').title()}', and you'll get better!")
+    else:
+        print(f"Error: Song file not found for '{selected_song}'. Please check the file path.")
+
 def study_for_exams(player):
     print("You've decided to study. What would you like to study for?")
     print("1. Academic Exams")
@@ -264,6 +304,7 @@ def load_questions(file_path):
     return questions
 
 # Function to handle chatting with friends
+
 def chat_with_friends(player):
     print("You join your friends at a table and start chatting.")
 
@@ -272,12 +313,16 @@ def chat_with_friends(player):
         "1. Talk about the upcoming school musical.",
         "2. Discuss the latest basketball game.",
         "3. Share your plans for the weekend.",
+        "4. Bring up a recent movie you watched.",
+        "5. Discuss a trending topic from social media.",
+        "6. Share a funny story from school.",
+        "7. Express your thoughts on a controversial topic.",
     ]
 
     for option in conversation_options:
         print(option)
 
-    conversation_choice = input("Choose a topic to discuss (1, 2, or 3): ")
+    conversation_choice = input("Choose a topic to discuss (1-7): ")
 
     if conversation_choice == '1':
         print("Your friends are excited about the musical. You share your interest and become more involved.")
@@ -290,6 +335,18 @@ def chat_with_friends(player):
     elif conversation_choice == '3':
         print("You talk about your plans for the weekend. Your friends find it interesting, and your social status improves.")
         player.social_status += 8
+    elif conversation_choice == '4':
+        print("You bring up a recent movie you watched. Your friends enjoy the discussion.")
+        player.social_status += 5
+    elif conversation_choice == '5':
+        print("You discuss a trending topic from social media. Your friends appreciate your insights.")
+        player.social_status += 7
+    elif conversation_choice == '6':
+        print("You share a funny story from school. Your friends laugh, and your social status improves.")
+        player.social_status += 8
+    elif conversation_choice == '7':
+        print("You express your thoughts on a controversial topic. Some friends disagree, and your social status may decrease.")
+        player.social_status -= 5
     else:
         print("Invalid choice. The conversation continues without a significant impact.")
 
@@ -313,32 +370,12 @@ def go_to_cafeteria(player):
     elif cafeteria_choice == '2':
         get_food_sub_option(player)
     elif cafeteria_choice == '3':
-        memory_mini_game(player)
+        player.play_memory_minigame()
     elif cafeteria_choice == '4':
         blackjack_game.play_blackjack(player)
     else:
         print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
-# New function for the memory mini-game
-def memory_mini_game(player):
-    print("You decide to challenge your memory with a quick mini-game.")
-
-    # Generate a sequence of numbers
-    sequence = [1, 2, 3, 4, 5]
-    print("Memorize the sequence:", sequence)
-
-    # Player's turn to recall the sequence
-    user_input = input("Enter the sequence, separated by spaces: ")
-    user_sequence = [int(num) for num in user_input.split()]
-
-    # Check if the player's input matches the generated sequence
-    if user_sequence == sequence:
-        print("Congratulations! You remembered the sequence.")
-        # Add any rewards or stat improvements here
-        player.academic_knowledge += 5
-        player.energy -= 5
-    else:
-        print("Oops! It seems like you forgot the sequence.")
 
 def get_food_sub_option(player):
     print("You decide to grab some food.")
@@ -389,10 +426,28 @@ def get_food_sub_option(player):
     # Limit energy to a maximum value (e.g., 100)
     player.energy = min(player.energy, 100)
 # You can expand and customize this function based on your game's requirements.
+def introduction():
+    print("🌟 Welcome to East High! 🌟")
+    print("Get ready to embark on a musical journey filled with friendship, love, and unforgettable moments.")
+    
+    # Prompt the user for their name
+    player_name = input("Before we begin, what's your name? ")
 
-def game_loop(player):
-    print("Welcome to the High School Musical Python Game!")
+    # Create a player object with the user's name
+    player = Player(name=player_name)
 
+    print(f"Great, {player.name}! You are now a student at East High, where the air is buzzing with excitement and the halls are alive with the sound of music.")
+    print("As you navigate through classes, interact with friends, and face the challenges of high school life, remember that we're all in this together.")
+    print("It's time to discover your talents, break free from the status quo, and create a high school experience you'll cherish forever.")
+    print("Let the Wildcats adventure begin!\n")
+    
+    # Prompt the user to press Enter to start the game
+    input("Press Enter to start your high school adventure...")
+    return player
+
+def game_loop():
+    player = introduction()
+    continue_story(player)
     while True:
         print("\nOptions:")
         print("1. Continue the story")
@@ -467,5 +522,4 @@ def display_stats(player):
 
 # Example usage:
 if __name__ == "__main__":
-    player = Player()
-    game_loop(player)
+    game_loop()
