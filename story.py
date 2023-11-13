@@ -5,6 +5,8 @@ import re
 import blackjack_game
 from player import Player
 
+QUESTION_DIR = "questions"
+
 '''
 def introduction(player):
     print("Welcome to the High School Musical Adventure!")
@@ -282,6 +284,7 @@ def study_for_exams(player):
         print("Keep studying, and you'll do great.")
 
 def load_questions(file_path):
+    file_path = f'{QUESTION_DIR}/{file_path}'
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
