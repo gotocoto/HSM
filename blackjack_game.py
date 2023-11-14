@@ -38,16 +38,11 @@ def determine_winner(player_hand, dealer_hand):
 def update_player_stats(player, win):
     if win:
         print("Your performance was outstanding! You gain some skills.")
-        player.strategy_skill += 2  # New strategy skill improvement
+        player.strategy_skills += 2  # New strategy skill improvement
     else:
         print("It was a tough game, but you'll get them next time.")
 
 # Introducing the new strategy skill
-class Player:
-    def __init__(self):
-        self.basketball_skills = 0
-        self.singing_skills = 0
-        self.strategy_skill = 0  # New skill attribute
 
 def play_blackjack(player):
     print("You decide to play a quick game of Blackjack on your phone.")

@@ -5,13 +5,8 @@ Welcome to the High School Musical Python Game! This text-based game is inspired
 
 ## Getting Started
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/your-username/high-school-musical-game.git
-   cd high-school-musical-game
-   ```
 
-2. **Run the Game:**
+1. **Run the Game:**
    ```bash
    python main.py
    ```

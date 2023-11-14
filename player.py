@@ -15,14 +15,16 @@ class Player:
         self.academic_knowledge = 0
         self.singing_skills = 0
         self.basketball_skills = 0
-        self.strategy_skill = 0
+        self.strategy_skills = 0
         self.basketball_team_member = False
         self.musical_member = False
+        self.job = False
         self.energy = 50
         self.money = 20  # Default starting money
         self.social_status = 50  # Default starting social status
         self.difficulty = difficulty
         self.stage = 1
+        
     def save_to_file(self, filename):
         # Save player data to a JSON file
         with open(filename, 'w') as file:
@@ -74,6 +76,7 @@ class Player:
                 if "[" in line and "]" in line:
                     singer = re.search(r'\[.*?\]', line).group(0)
                     print(f"\n{singer} {line.replace(singer, '').strip()}")
+                    continue
 
                 user_input = input("\nEnter the next line: ")
                 # Check if the user's input is correct, excluding empty lines

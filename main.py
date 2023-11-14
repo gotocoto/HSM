@@ -105,11 +105,11 @@ def audition_for_musical(player):
     song_file_name = 'what_ive_been_looking_for'
     singing_result = player.singing_mini_game(song_file_name)
 
-    # Determine Ms. Darbus's impression based on the score
     if singing_result:
         print("\nMs. Darbus is impressed with your singing performance!")
         player.singing_skills += 10
         player.musical_member = True
+        print("\n You later find out that you got called back! Congradulations!!")
     else:
         print("\nUnfortunately, your performance did not impress Ms. Darbus. Better luck next time.")
 
@@ -817,14 +817,16 @@ def work_mini_game():
 
 # Updated work_part_time function with the mini-game
 def work_part_time(player):
-    print("\nYou decide to take up a part-time job to earn some extra money.")
-    time.sleep(3)
+    if(not player.job):
+        print("\nYou decide to take up a part-time job to earn some extra money.")
+        time.sleep(3)
 
-    # Simulate the job
-    print("\nYou find a job at the local community center, helping with various tasks.")
-    time.sleep(4)
-    print("Your responsibilities include organizing events, assisting in classes, and managing the front desk.")
-    time.sleep(4)
+        # Simulate the job
+        print("\nYou find a job at the local community center, helping with various tasks.")
+        time.sleep(4)
+        print("Your responsibilities include organizing events, assisting in classes, and managing the front desk.")
+        time.sleep(4)
+        player.job = True
 
     # Mini-game
     work_mini_game()

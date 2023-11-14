@@ -1,1 +1,1 @@
-{"name": "Jack", "academic_knowledge": 0, "singing_skills": 0, "basketball_skills": 0, "strategy_skill": 0, "basketball_team_member": false, "musical_member": true, "energy": 50, "money": 20, "social_status": 50, "difficulty": 1}
+{"name": "Jack", "academic_knowledge": 0, "singing_skills": 0, "basketball_skills": 0, "strategy_skills": 0, "basketball_team_member": false, "musical_member": false, "energy": 50, "money": 20, "social_status": 50, "difficulty": 1, "stage": 1}
