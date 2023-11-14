@@ -152,7 +152,7 @@ def try_out_for_basketball(player):
 
     # If the player practiced, adjust the success rate for the actual tryouts
     success_rate = 0.7 if practice_choice == 'yes' else 0.5
-    player.basketball_skills += practice_basketball_mini_game()
+    player.practice_basketball_mini_game()
 
     if player.basketball_skills >= 15:
         print("Congratulations! You made it onto the basketball team!")
@@ -161,31 +161,6 @@ def try_out_for_basketball(player):
         print("Sadly you didn't make it on the basketball team try again soon!")
 
 
-def practice_basketball_mini_game():
-    print("Press the enter key when shooting a shot. Hit the enter key again at the perfect time to make a shot")
-    time.sleep(1)
-
-    baskets_made = 0
-    for _ in range(10):
-        input("Get ready to shoot! Hold 'Enter' to shoot.")
-        start_time = time.time()
-
-        while True:
-            if input() == '':
-                end_time = time.time()
-                break
-
-        time_held = end_time - start_time
-
-        if time_held < 1.5:  # Time required to make a basket
-            print("Oops! You didn't hold the key long enough. Try again.")
-        elif time_held > 2.5:
-            print("Ohh no! You held the key too long enough. Try again.")
-        else:
-            print("Swish! You made the basket!")
-            baskets_made += 1
-
-    return (baskets_made / 10) * 10  # Convert to a score out of 10
 
 
 def practice_singing(player):
@@ -555,7 +530,7 @@ def continue_story(player):
         elif choice == '2':
             if player.basketball_team_member:
                 print("You decide to attend basketball practice.")
-                practice_basketball_mini_game(player)
+                player.practice_basketball_mini_game()
             else:
                 print("You decide to attend basketball tryouts.")
                 try_out_for_basketball(player)
@@ -666,6 +641,8 @@ def special_scene_1(player):
         print("Unfortunately, your attempt to embrace the unexpected did not go as planned.")
         time.sleep(2)
         print("Despite the setback, the students rally on, and you decide to refocus on your own competitions.\n")
+        time.sleep(3)
+        print("Try this scene again another time.\n")
 
     time.sleep(3)  # Adding a delay for better readability
 
