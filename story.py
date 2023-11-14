@@ -32,66 +32,87 @@ def focus_on_studies(player):
 
 def audition_for_musical(player):
     print("🎭 Audition for the school musical! 🎤")
-    time.sleep(1)
+    time.sleep(2)
 
     # Display information about the audition
     print("The school musical auditions are here, and the stage is set.")
-    time.sleep(1)
-    print(f"You see Troy across the stage, He is also auditioning?")
     time.sleep(3)
+    print(f"You see Troy across the stage. He is also auditioning?")
+    time.sleep(4)
 
     # Simulate the initial audition scenario
     print("\nSharpay and Ryan Evans walk onto the stage.")
-    time.sleep(3)
-    print("\nSharpay and Ryan Evans: (singing) It's hard to believe\nThat I couldn't see...")
-    time.sleep(6)
+    time.sleep(4)
+    print("\nSharpay and Ryan Evans start singing...\n ")
+    time.sleep(1)
+    print("It's hard to believe\nThat I couldn't see...")
+    time.sleep(7)
+
+    # Indicate the end of Sharpay and Ryan Evans' song
+    print("\nSharpay and Ryan Evans finish their song.")
 
     # Display the hesitation of Troy and the player
     print(f"\nTroy and you watch the performance but are hesitant to audition.")
-    time.sleep(2)
+    time.sleep(4)
     print("As the auditions are unofficially declared 'over', you gain the confidence to step forward.")
-    time.sleep(2)
+    time.sleep(4)
+
+    # Internal dialogue - Player's nervous thoughts
+    print("\nYou take a deep breath, your heart racing.")
+    time.sleep(3)
+    print("This is it, your first time ever auditioning. You can't help but feel a mix of excitement and nerves.")
+    time.sleep(4)
+    print("Your palms are sweaty, and your mind is a whirlwind of doubts and hopes.")
+    time.sleep(4)
+    print("But there's no turning back now. You've got to step up and take this chance.")
 
     # Offer Troy to sing with the player
     troy_offer = input(f"Troy offers to sing with you. Do you accept? (yes/no): ").lower()
-    time.sleep(1)
+    time.sleep(3)
 
     if troy_offer == 'yes':
-        print(f"You and Troy step forward to audition together.")
-        time.sleep(2)
+        print(f"\nYou and Troy step forward to audition together.")
+        time.sleep(4)
     else:
-        print(f"You decide not to audition with Troy.")
-        time.sleep(2)
+        print(f"\nYou decide not to audition with Troy.")
+        time.sleep(3)
         print("Without a co-singer, you can't proceed with the audition.")
         print("Unfortunately, your journey at East High School ends here.")
         return  # End the story
 
     # Drama teacher Ms. Darbus declares them too late and leaves
     print("Ms. Darbus declares that you are too late and leaves the stage.")
-    time.sleep(3)
+    time.sleep(5)
 
     # Kelsi drops her music sheets on the stage
-    print("Kelsi Nielsen, the musical's composer, drops her music sheets on the stage.")
-    time.sleep(2)
+    print("\nSuddenly, you hear the unmistakable sound of paper fluttering down.")
+    time.sleep(4)
+    print("Kelsi Nielsen, the musical's composer, has dropped her music sheets on the stage.")
+    time.sleep(4)
+    print("The sheets scatter like leaves in the wind, creating an unexpected moment of chaos.")
+    time.sleep(5)
     print(f"You and Troy rush to help her and decide to sing the same song together.")
-    time.sleep(2)
+    time.sleep(4)
 
     # Simulate singing together
     print(f"\nTroy and {player.name}: (singing) It's hard to believe\nThat I couldn't see...")
-    time.sleep(3)
+    time.sleep(6)
+
+    
 
     # Singing mini-game with Troy and get the score
     print("\nGet ready to sing with Troy! Complete the lyrics:\n")
-    song_file_path = 'what_ive_been_looking_for'
-    singing_result = player.singing_mini_game(song_file_path)
+    song_file_name = 'what_ive_been_looking_for'
+    singing_result = player.singing_mini_game(song_file_name)
 
     # Determine Ms. Darbus's impression based on the score
     if singing_result:
-        print("Ms. Darbus is impressed with your singing performance!")
+        print("\nMs. Darbus is impressed with your singing performance!")
         player.singing_skills += 10
         player.musical_member = True
     else:
-        print("Unfortunately, your performance did not impress Ms. Darbus. Better luck next time.")
+        print("\nUnfortunately, your performance did not impress Ms. Darbus. Better luck next time.")
+
 
 def perform_song(song, *characters):
     print(f"You've chosen to perform '{song}'!")
@@ -183,19 +204,6 @@ def practice_basketball_mini_game():
             print("Nice shot! You made the basket!")
 
 def practice_singing(player):
-    print("You've decided to practice your singing skills.")
-    time.sleep(1)
-    print("Do you want to practice singing 'Start of Something New' (1), 'Get'cha Head in the Game' (2), or 'Breaking Free' (3)?")
-    choice = make_choice(player)
-
-    if choice == '1':
-        player.singing_skills += practice_song('Start of Something New', 'Troy', 'Gabriella')
-    elif choice == '2':
-        player.singing_skills += practice_song('Get\'cha Head in the Game', 'Basketball Team')
-    elif choice == '3':
-        player.singing_skills += practice_song('Breaking Free', 'Troy', 'Gabriella')
-
-def practice_singing(player):
     print("You decide to practice singing for the upcoming musical.")
 
     # List of available High School Musical songs (replace with your song names)
@@ -228,18 +236,15 @@ def practice_singing(player):
 
     # File path for the selected song lyrics (replace with your file path)
     song_file_path = f"{selected_song}"
+    success = player.singing_mini_game(song_file_path)
 
-    # Ensure the file exists before calling the singing mini-game
-    if os.path.exists(song_file_path):
-        # Call the singing mini-game
-        success = player.singing_mini_game(song_file_path)
-
-        if success:
-            print(f"Your singing skills on '{selected_song.replace('_', ' ').title()}' have improved through practice!")
-        else:
-            print(f"Keep practicing '{selected_song.replace('_', ' ').title()}', and you'll get better!")
+    if success:
+        print(f"Your singing skills on '{selected_song.replace('_', ' ').title()}' have improved through practice!")
     else:
-        print(f"Error: Song file not found for '{selected_song}'. Please check the file path.")
+        print(f"Keep practicing '{selected_song.replace('_', ' ').title()}', and you'll get better!")
+    '''
+    else:
+        print(f"Error: Song file not found for '{selected_song}'. Please check the file path.")'''
 
 def study_for_exams(player):
     print("You've decided to study. What would you like to study for?")
@@ -507,8 +512,8 @@ def continue_story(player):
         
         if choice == '1':
             if player.musical_member:
-                print("You decide to attend musical rehearsal.")
-                musical_rehearsal(player)
+                print("You decide to attend musical rehearsal.\n")
+                practice_singing(player)
             else:
                 print("You decide to audition for the school musical.")
                 audition_for_musical(player)

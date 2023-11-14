@@ -5,7 +5,9 @@ import os
 import getpass
 import time
 import json
-
+import re
+# Constant for the lyrics folder path
+LYRICS_FOLDER = "lyrics/"
 
 class Player:
     def __init__(self, name="Player", difficulty=1):
@@ -37,56 +39,58 @@ class Player:
         self.energy -= 10  # Studying consumes energy
         print("You've gained some academic knowledge, but you feel a bit tired.")
 
-    def preprocess_line(line):
-    # Remove punctuation and convert to lowercase
-    line = re.sub(r'[^\w\s]', '', line).lower()
-    return line
+    def preprocess_line(self, line):
+        # Remove punctuation and convert to lowercase
+        return re.sub(r'[^\w\s]', '', line).lower()
 
-    def singing_mini_game(player, file_path):
-        # Load the lines from the file, excluding empty lines
+    def singing_mini_game(self, song_name):
+        # Construct the full file path for the chosen song
+        file_path = os.path.join(LYRICS_FOLDER, f"{song_name}_lyrics.txt")
+
+        # Load the lines from the chosen file, excluding empty lines
         with open(file_path, 'r') as file:
-            lines = file.read().splitlines()
-            lyrics = [line for line in lines if line.strip()]
+            lyrics = [line.strip() for line in file if line.strip()]
 
         # Choose a random starting point in the lyrics
-        start_index = random.randint(0, len(lyrics) - player.difficulty)
-        lines_to_display = 4 + player.difficulty  # Adjust the number of lines based on difficulty
-        lines_to_sing = lyrics[start_index:start_index + lines_to_display]
-
-        # Display the starting lines to the player
-        print("\nGet ready to sing! Complete the lyrics:")
-        for line in lines_to_sing:
-            print(line)
+        start_index = random.randint(0, len(lyrics) - self.difficulty - 4)  # Subtract 4 to ensure at least 4 lines are displayed
+        lines_to_display = 4  # Adjust the number of lines based on difficulty
 
         # User input for singing
-        if player.difficulty > 0:
-            correct_lines = lyrics[start_index:start_index + lines_to_display]
-            user_input_lines = []
+        while start_index + lines_to_display + self.difficulty < len(lyrics):
+            lines_to_sing = lyrics[start_index:start_index + lines_to_display]
 
+            # Display the lines to the player
+            print("\nGet ready to sing! Complete the lyrics:")
             for line in lines_to_sing:
+                print(line)
+
+            correct_lines = lyrics[start_index + lines_to_display: start_index + lines_to_display + self.difficulty]
+
+            for line in correct_lines:
                 # Check if the line is wrapped in brackets
                 if "[" in line and "]" in line:
                     singer = re.search(r'\[.*?\]', line).group(0)
                     print(f"\n{singer} {line.replace(singer, '').strip()}")
+
                 user_input = input("\nEnter the next line: ")
                 # Check if the user's input is correct, excluding empty lines
-                correct_line = preprocess_line(correct_lines.pop(0))
-                user_input_processed = preprocess_line(user_input)
+                correct_line = self.preprocess_line(correct_lines.pop(0))
+                user_input_processed = self.preprocess_line(user_input)
 
-                if user_input_processed == correct_line:
-                    print("Correct!")
-                else:
+                while user_input_processed != correct_line:
                     print(f"**SCREECH** You said the wrong line. Let's try again...")
                     user_input = input("\nEnter the correct line: ")
-                    user_input_processed = preprocess_line(user_input)
-                    if user_input_processed == correct_line:
-                        print("Great! You got it right on the second try.")
-                    else:
-                        print(f"Oops! You said the wrong line again. The correct line is: {correct_line}")
-                        return False
+                    user_input_processed = self.preprocess_line(user_input)
+
+                print("Correct!")
+
+            start_index += lines_to_display + self.difficulty
 
         print("Congratulations! You sang it perfectly.")
         return True
+
+
+
     
     def play_memory_minigame(self):
         print("You decide to challenge your memory with a quick mini-game.")
