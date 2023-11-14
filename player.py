@@ -22,6 +22,7 @@ class Player:
         self.money = 20  # Default starting money
         self.social_status = 50  # Default starting social status
         self.difficulty = difficulty
+        self.stage = 1
     def save_to_file(self, filename):
         # Save player data to a JSON file
         with open(filename, 'w') as file:

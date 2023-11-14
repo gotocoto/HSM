@@ -515,9 +515,16 @@ def game_loop():
         else:
             print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
+# Define stage thresholds as a constant
+STAGE_THRESHOLDS = {
+    1: {'singing_skills': 30},
+    2: {'basketball_skills': 25},
+    3: {'basketball_skills': 40, 'social_status': 70, 'academic_knowledge': 60, 'strategy_skills': 50}
+}
+
 def continue_story(player):
     print("\nYou find yourself at East High School facing various challenges and opportunities.")
-    
+
     while True:
         print("\nOptions:")
         if player.musical_member:
@@ -530,10 +537,15 @@ def continue_story(player):
             print("2. Attend basketball tryouts")
         print("3. Study for exams")
         print("4. Go to the cafeteria")
-        print("5. Back to main menu")
 
-        choice = input("Enter your choice (1, 2, 3, 4, or 5): ")
-        
+        # Determine which special scene to show based on the player's stage
+        if player.stage in STAGE_THRESHOLDS:
+            print(f"5. Unlockable Scene")
+
+        print("6. Back to main menu")
+
+        choice = input(f"Enter your choice (1, 2, 3, 4, 5, or 6): ")
+
         if choice == '1':
             if player.musical_member:
                 print("You decide to attend musical rehearsal.\n")
@@ -552,11 +564,23 @@ def continue_story(player):
             study_for_exams(player)
         elif choice == '4':
             go_to_cafeteria(player)
-        elif choice == '5':
+        elif player.stage in STAGE_THRESHOLDS and choice == '5':
+            # Unlockable Scenes
+            required_skills = STAGE_THRESHOLDS[player.stage]
+
+            if all(getattr(player, skill, 0) >= value for skill, value in required_skills.items()):
+                print(f"You unlock a special scene and decide to explore it.")
+                special_scene(player)
+            else:
+                skill_to_improve = determine_skill_to_improve(player)
+                print(f"You don't meet the requirements to unlock this scene.")
+                print(f"Improve your {skill_to_improve} and try again.")
+        elif choice == '6':
             print("Returning to the main menu.")
             break
         else:
-            print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
+            print("Invalid choice. Please enter 1, 2, 3, 4, 5, or 6.")
+
 
 def display_stats(player):
     # Display player stats
@@ -568,6 +592,42 @@ def display_stats(player):
     print(f"Musical Member: {player.musical_member}")
     print(f"Energy: {player.energy}")
 
+def determine_skill_to_improve(player):
+    current_stage = player.stage
+    required_skills = STAGE_THRESHOLDS.get(current_stage, {})
+
+    # Find the skill with the lowest current value compared to the required value
+    lowest_skill = None
+    lowest_difference = float('inf')
+
+    for skill, required_value in required_skills.items():
+        current_value = getattr(player, skill, 0)
+        difference = required_value - current_value
+
+        if difference > 0 and difference < lowest_difference:
+            lowest_skill = skill
+            lowest_difference = difference
+
+    return lowest_skill
+def special_scene(player):
+    if player.stage == 1:
+        special_scene_1(player)
+    elif player.stage == 2:
+        special_scene_2(player)
+    elif player.stage == 3:
+        special_scene_3(player)
+    else:
+        print("No special scene available for the current stage.")
+
+# You can define the specific content for each special scene below
+def special_scene_1(player):
+    print("Special Scene 1 Content")
+
+def special_scene_2(player):
+    print("Special Scene 2 Content")
+
+def special_scene_3(player):
+    print("Special Scene 3 Content")
 # Example usage:
 if __name__ == "__main__":
     game_loop()
