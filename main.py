@@ -5,7 +5,7 @@ import re
 import blackjack_game
 from player import Player
 import os
-
+player_data_file = "player_data.json"
 QUESTION_DIR = "questions"
 
 '''
@@ -453,7 +453,7 @@ def introduction_cut_scene(player):
     return player
 
 def game_loop():
-    player_data_file = "player_data.json"  # Replace with your desired file name
+      # Replace with your desired file name
     player = Player("Dummy") 
 
     # Check if the player data file exists
@@ -556,6 +556,7 @@ def continue_story(player):
             break
         else:
             print("Invalid choice. Please enter 1, 2, 3, 4, 5, or 6.")
+        player.save_to_file(player_data_file)
 
 
 def display_stats(player):
