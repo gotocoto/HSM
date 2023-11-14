@@ -152,14 +152,17 @@ def try_out_for_basketball(player):
 
     # If the player practiced, adjust the success rate for the actual tryouts
     success_rate = 0.7 if practice_choice == 'yes' else 0.5
-    player.basketball_skills += basketball_mini_game(success_rate)
+    player.basketball_skills += practice_basketball_mini_game()
 
     if player.basketball_skills >= 15:
         print("Congratulations! You made it onto the basketball team!")
         player.basketball_team_member = True
+    else:
+        print("Sadly you didn't make it on the basketball team try again soon!")
 
-def basketball_mini_game(success_rate):
-    print("Hold the 'Enter' key for the specified time to make a basket.")
+
+def practice_basketball_mini_game():
+    print("Press the enter key when shooting a shot. Hit the enter key again at the perfect time to make a shot")
     time.sleep(1)
 
     baskets_made = 0
@@ -176,32 +179,14 @@ def basketball_mini_game(success_rate):
 
         if time_held < 1.5:  # Time required to make a basket
             print("Oops! You didn't hold the key long enough. Try again.")
+        elif time_held > 2.5:
+            print("Ohh no! You held the key too long enough. Try again.")
         else:
             print("Swish! You made the basket!")
             baskets_made += 1
 
     return (baskets_made / 10) * 10  # Convert to a score out of 10
 
-def practice_basketball_mini_game():
-    print("You have 5 attempts to practice your shooting skills.")
-    time.sleep(1)
-
-    for _ in range(5):
-        print("Hold the 'Enter' key for the specified time to make a basket.")
-        input("Get ready to shoot! Hold 'Enter' to shoot.")
-        start_time = time.time()
-
-        while True:
-            if input() == '':
-                end_time = time.time()
-                break
-
-        time_held = end_time - start_time
-
-        if time_held < 1.5:  # Time required to make a basket
-            print("Oops! You didn't hold the key long enough. Try again.")
-        else:
-            print("Nice shot! You made the basket!")
 
 def practice_singing(player):
     print("You decide to practice singing for the upcoming musical.")
@@ -451,7 +436,45 @@ def introduction():
     print("Let the Wildcats adventure begin!\n")
     
     # Prompt the user to press Enter to start the game
-    input("Press Enter to start your high school adventure...")
+    input("Press Enter to start your high school adventure...\n")
+    return player
+
+def introduction_cut_scene(player):
+    print("🌟 Welcome to the High School Musical Adventure! 🌟")
+    time.sleep(2)
+    print("On New Year's Eve, you, a high school junior, find yourself at a lively ski lodge party during winter break.")
+    time.sleep(4)
+    print("Amid the celebration, you meet a fellow party-goer named Troy Bolton.")
+    time.sleep(3)
+    print("As fate would have it, the two of you are called upon to sing a duet together for karaoke, marking the 'Start of Something New.'")
+    time.sleep(5)
+
+    # Construct the full file path for the chosen song
+    song_name = 'start_of_something_new'
+    
+    # Singing mini-game with Troy and get the score
+    singing_result = player.singing_mini_game(song_name)
+
+    if singing_result:
+        print("The duet concludes, leaving both you and Troy in awe of the musical connection you share.")
+        time.sleep(3)
+    else:
+        print("Despite a few hiccups, the duet concludes. It seems there's room for improvement, but you've made it through.")
+        time.sleep(3)
+
+    print("The holiday break comes to an end, and you return to school, only to find Troy in your homeroom.")
+    time.sleep(4)
+    print("He shows you around East High School, and you explain that you've just moved to Albuquerque, New Mexico, and transferred to East High over the break.")
+    time.sleep(5)
+    print("Little do you know, drama club president Sharpay Evans is already plotting to secure the lead roles in the school musical.")
+    time.sleep(4)
+    print("Sharpay, fearing competition, discovers your impressive academic achievements and anonymously informs scholastic decathlon captain Taylor McKessie.")
+    time.sleep(5)
+    print("Taylor, impressed by your achievements, recruits you for the scholastic decathlon team, leading to an unexpected friendship between you and Taylor.")
+    time.sleep(4)
+    print("Now, with the stage set, your journey at East High School is about to unfold. Are you ready for the adventure?\n")
+
+    input("")
     return player
 
 def game_loop():
@@ -465,6 +488,7 @@ def game_loop():
         print("Welcome back, {}!".format(player.name))
     else:
         player = introduction()
+        player = introduction_cut_scene(player)
     continue_story(player)
     while True:
         print("\nOptions:")
@@ -520,10 +544,10 @@ def continue_story(player):
         elif choice == '2':
             if player.basketball_team_member:
                 print("You decide to attend basketball practice.")
-                basketball_practice(player)
+                practice_basketball_mini_game(player)
             else:
                 print("You decide to attend basketball tryouts.")
-                go_to_basketball_tryouts(player)
+                try_out_for_basketball(player)
         elif choice == '3':
             study_for_exams(player)
         elif choice == '4':

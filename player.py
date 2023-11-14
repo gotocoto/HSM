@@ -55,12 +55,14 @@ class Player:
         start_index = random.randint(0, len(lyrics) - self.difficulty - 4)  # Subtract 4 to ensure at least 4 lines are displayed
         lines_to_display = 4  # Adjust the number of lines based on difficulty
 
+        print(f"\nIt's time to sing {song_name.replace('_', ' ').title()}")
+        print("Complete the lyrics:\n")
+
         # User input for singing
         while start_index + lines_to_display + self.difficulty < len(lyrics):
             lines_to_sing = lyrics[start_index:start_index + lines_to_display]
 
             # Display the lines to the player
-            print("\nGet ready to sing! Complete the lyrics:")
             for line in lines_to_sing:
                 print(line)
 
@@ -77,17 +79,22 @@ class Player:
                 correct_line = self.preprocess_line(correct_lines.pop(0))
                 user_input_processed = self.preprocess_line(user_input)
 
-                while user_input_processed != correct_line:
+                if user_input_processed != correct_line:
                     print(f"**SCREECH** You said the wrong line. Let's try again...")
                     user_input = input("\nEnter the correct line: ")
                     user_input_processed = self.preprocess_line(user_input)
 
-                print("Correct!")
+                    if user_input_processed != correct_line:
+                        print("Oops! You said the wrong line again. Better luck next time!\n")
+                        return False
+
+                print("Correct!\n")
 
             start_index += lines_to_display + self.difficulty
 
         print("Congratulations! You sang it perfectly.")
         return True
+
 
 
 
