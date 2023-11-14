@@ -537,14 +537,13 @@ def continue_story(player):
             print("2. Attend basketball tryouts")
         print("3. Study for exams")
         print("4. Go to the cafeteria")
-
         # Determine which special scene to show based on the player's stage
         if player.stage in STAGE_THRESHOLDS:
             print(f"5. Unlockable Scene")
+        print("6. Go to work")
+        print("7. Back to main menu")
 
-        print("6. Back to main menu")
-
-        choice = input(f"Enter your choice (1, 2, 3, 4, 5, or 6): ")
+        choice = input(f"Enter your choice (1, 2, 3, 4, 5, 6 or 7): ")
 
         if choice == '1':
             if player.musical_member:
@@ -576,6 +575,8 @@ def continue_story(player):
                 print(f"You don't meet the requirements to unlock this scene.")
                 print(f"Improve your {skill_to_improve} and try again.")
         elif choice == '6':
+            work_part_time(player)
+        elif choice == '7':
             print("Returning to the main menu.")
             break
         else:
@@ -620,14 +621,227 @@ def special_scene(player):
         print("No special scene available for the current stage.")
 
 # You can define the specific content for each special scene below
+
 def special_scene_1(player):
-    print("Special Scene 1 Content")
+    print("\nYou unlock a special scene and decide to explore it.")
+
+    # Display the scene introduction
+    time.sleep(2)
+    print("The callback list is posted, revealing the unexpected talents of East High students.")
+    time.sleep(3)
+    print("Sharpay, visibly upset about the competition for the lead role, exchanges glares with those who dared to audition.")
+    time.sleep(4)
+    print("The Wildcats basketball team, on the other hand, is in shock as they witness Troy stepping into uncharted territory.")
+    time.sleep(4)
+    print("A hush falls over the crowd as students, each with their own hidden passions, confess in the powerful anthem 'Stick to the Status Quo.'\n")
+    time.sleep(3)
+
+    # Internal dialogue - Player's thoughts during the performance
+    print("You find yourself caught up in the whirlwind of revelations.")
+    time.sleep(3)
+    print("The air is charged with both uncertainty and liberation, as students bravely break away from their stereotypes.")
+    time.sleep(3)
+    print("Sharpay's frustration is palpable, matched only by the astonishment on the faces of the Wildcats.")
+    time.sleep(3)
+    print("This is more than just a musical; it's a revelation of individuality and unexpected talents.")
+    time.sleep(3)
+
+    # Singing mini-game for "Stick to the Status Quo"
+    song_name = "stick_to_the_status_quo"
+    singing_result = player.singing_mini_game(song_name)
+
+    # Determine the outcome based on the singing result
+    if singing_result:
+        time.sleep(2)
+        print("The students are left in awe of your unexpected singing talent!")
+        time.sleep(2)
+        print("The applause resonates in the auditorium, and for a moment, you bask in the spotlight.")
+        time.sleep(2)
+        print("However, amidst the cheers, Taylor and Chad, ever vigilant about upcoming competitions, devise a plan to divert Troy and Gabriella from the musical.")
+        time.sleep(3)
+        print("Feeling a mix of accomplishment and curiosity, you decide to follow their plan, eager to maintain focus on your own challenges.\n")
+        player.stage += 1  # Move to the next stage
+    else:
+        time.sleep(2)
+        print("Unfortunately, your attempt to embrace the unexpected did not go as planned.")
+        time.sleep(2)
+        print("Despite the setback, the students rally on, and you decide to refocus on your own competitions.\n")
+
+    time.sleep(3)  # Adding a delay for better readability
 
 def special_scene_2(player):
-    print("Special Scene 2 Content")
+    print("\nYou unlock another special scene and decide to explore it.")
+
+    # Display the scene introduction
+    time.sleep(2)
+    print("In the locker room, tensions rise as Troy's teammates trick him into saying that Gabriella and the audition don't matter to him.")
+    time.sleep(4)
+    print("Unbeknownst to Troy, Gabriella watches this betrayal via a hidden webcam set up by the scholastic decathlon team.")
+    time.sleep(4)
+    print("Heartbroken and feeling betrayed by Troy's words, Gabriella decides not to audition for the musical.")
+    time.sleep(4)
+    print("As she grapples with the pain, Troy, confused by Gabriella's sudden distance, struggles to concentrate on the game.\n")
+    time.sleep(3)
+
+    # Internal dialogue - Player's thoughts during the turmoil
+    print("You feel a wave of emotions as the scene unfolds before you.")
+    time.sleep(3)
+    print("The locker room, once a space of camaraderie, becomes a battlefield of miscommunication and regret.")
+    time.sleep(3)
+    print("Troy's teammates, realizing their role in the misunderstanding, decide to set things right and offer their support.")
+    time.sleep(3)
+    print("Meanwhile, Gabriella, hurt and distant, remains unconvinced by Taylor's attempt to explain Troy's true feelings.")
+    time.sleep(3)
+
+    # Singing mini-game for "When There Was Me and You"
+    song_name = "when_there_was_me_and_you"
+    singing_result = player.singing_mini_game(song_name)
+
+    # Determine the outcome based on the singing result
+    if singing_result:
+        time.sleep(2)
+        print("The poignant rendition of 'When There Was Me and You' echoes through the scenes, conveying the depth of emotions.")
+        time.sleep(2)
+        print("Troy, shaken by the impact of his words, confronts the reality of the situation and seeks to make amends.")
+        time.sleep(2)
+        print("Chad and the basketball team, realizing their mistake, share the truth with Troy and offer their support.")
+        time.sleep(2)
+        print("Taylor, persistent in her efforts, attempts to explain the misunderstanding to Gabriella, but faces resistance.")
+        time.sleep(2)
+        print("In the end, the haunting melody leaves a lingering sense of sadness and longing, setting the stage for reconciliation.\n")
+        player.stage += 1  # Move to the next stage
+    else:
+        time.sleep(2)
+        print("Your attempt to convey the emotional turmoil through 'When There Was Me and You' falls short.")
+        time.sleep(2)
+        print("Despite the setback, the story must go on, and the characters will find their own path to resolution.\n")
+
+    time.sleep(3)  # Adding a delay for better readability
 
 def special_scene_3(player):
-    print("Special Scene 3 Content")
+    print("\nYou unlock a special scene and decide to explore it.")
+    time.sleep(2)
+    print("You overhear Gabriella and Troy rehearsing for the callbacks.")
+    time.sleep(4)
+    print("Sharpay approaches Ms. Darbus with a request to schedule the callbacks during the championship game "
+          "and the scholastic decathlon competition.")
+    time.sleep(5)
+    print("Kelsi overhears the conversation and informs the basketball and decathlon teams.")
+    time.sleep(4)
+    print("A plan is formed to help Troy and Gabriella make it to the callbacks.")
+    time.sleep(4)
+    print("On the day of the competitions, the school buzzes with excitement as the plan is set in motion.")
+    time.sleep(4)
+    print("The air is thick with anticipation as you watch Taylor and Gabriella execute their part flawlessly.")
+    time.sleep(4)
+    print("Chad and the basketball team create chaos during the scholastic decathlon, keeping everyone on their toes.")
+    time.sleep(4)
+    print("Tension rises as you see Troy and Gabriella rushing to the auditorium, determined to make it in time.")
+    time.sleep(4)
+
+    # Additional narrative elements to be added here
+
+    # Singing minigame for "Breaking Free"
+    print("\nThe auditorium is filled with a palpable energy as you prepare to sing 'Breaking Free' with Troy and Gabriella.")
+    time.sleep(4)
+    if not player.singing_mini_game("breaking_free"):
+        print("Your performance wasn't perfect, but you made it through!")
+    else:
+        print("Congratulations! You sang 'Breaking Free' perfectly, capturing the essence of the moment.")
+
+    time.sleep(4)
+    print("Ms. Darbus, with a twinkle in her eye, is impressed with your singing, but Sharpay and Ryan exchange disapproving glances.")
+    time.sleep(4)
+    print("The stage is set for the final performance of the day, and the entire school eagerly awaits.")
+    time.sleep(4)
+    
+    # Player advances to the next stage
+    player.stage += 1
+
+    # Continue to Special Scene 4
+    special_scene_4(player)
+
+def special_scene_4(player):
+    print("Chad asks Taylor out, and Sharpay, in a surprising turn of events, makes a truce with Gabriella.")
+    time.sleep(4)
+    print("As the day comes to an end, you reflect on the challenges you've overcome and the friendships you've formed.")
+    time.sleep(4)
+
+    # Singing minigame for "We're All in This Together"
+    print("\nThe gym transforms into a stage, and you find yourself leading the entire school in a spirited performance of 'We're All in This Together.'")
+    time.sleep(4)
+    if not player.singing_mini_game("were_all_in_this_together"):
+        print("The performance wasn't flawless, but the collective spirit of unity shines through!")
+    else:
+        print("Bravo! You've not only completed the song but led the school in a flawless performance of 'We're All in This Together.'")
+
+    time.sleep(4)
+    print("The gym erupts in cheers and applause, echoing the triumph of both competitions and the musical callbacks.")
+    time.sleep(4)
+
+    print("Congratulations! You've successfully navigated through the twists and turns of East High School.")
+    time.sleep(4)
+    print("You've completed the game, and the memories of this extraordinary day will stay with you forever.")
+    time.sleep(4)
+
+def work_mini_game():
+    print("\nWelcome to your part-time job! Let's get to work.")
+    time.sleep(2)
+
+    # Simulate a task in the mini-game
+    print("\nTask 1: Organize the event schedule.")
+    print("You need to arrange the upcoming events in the correct order.")
+    
+    # Generate a random order for events
+    events = ["Dance Class", "Craft Workshop", "Fitness Bootcamp", "Language Class"]
+    random.shuffle(events)
+
+    # Display the events to the player
+    print("\nEvents:")
+    for i, event in enumerate(events, 1):
+        print(f"{i}. {event}")
+
+    # User input to organize the events
+    correct_order = sorted(events)
+    user_input = input("\nEnter the correct order (1, 2, 3, 4): ")
+
+    # Check if the user's input is correct
+    if user_input == ' '.join(map(str, range(1, 5))):
+        print("Great job! You successfully organized the event schedule.")
+    else:
+        print("Oops! It looks like there was a mistake. Keep practicing!")
+
+    time.sleep(2)
+
+    # You can add more tasks to the mini-game based on the job's responsibilities
+
+# Updated work_part_time function with the mini-game
+def work_part_time(player):
+    print("\nYou decide to take up a part-time job to earn some extra money.")
+    time.sleep(3)
+
+    # Simulate the job
+    print("\nYou find a job at the local community center, helping with various tasks.")
+    time.sleep(4)
+    print("Your responsibilities include organizing events, assisting in classes, and managing the front desk.")
+    time.sleep(4)
+
+    # Mini-game
+    work_mini_game()
+
+    # Determine the earnings based on the player's skills
+    earnings = (player.social_status + player.academic_knowledge + player.strategy_skills) * 2
+
+    print(f"\nYour hard work pays off, and you earn ${earnings}.")
+    time.sleep(3)
+
+    # Add the earnings to the player's money
+    player.money += earnings
+
+    print(f"\nYour current balance: ${player.money}")
+    time.sleep(3)
+
+
 # Example usage:
 if __name__ == "__main__":
     game_loop()
