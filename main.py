@@ -144,7 +144,7 @@ def try_out_for_basketball(player):
     if practice_choice == 'yes':
         print("Let's practice your shooting skills!")
         time.sleep(1)
-        player.basketball_skills += practice_basketball_mini_game()
+        player.practice_basketball_mini_game()
 
     print("Now, it's time for the actual tryouts.")
     time.sleep(1)
